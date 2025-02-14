@@ -1,13 +1,8 @@
-### 1: Pretraining
+List of experiments to try out for a whole year to stay on top of latest research. wiil be updating as time goes. I should have been doing this a year ago.
 
-#### 1.1: Small Model 300M
+1. Add reasoning to small model
+2. pretrain small model and then add reasoning
+3. 50% pre-train + reasoning skill + again pre-train further? check outcome.
+4. Priming LLM just enough to trigger reasoning and give a non-differentiable memory. 
 
-1. Setup all data pipelines
-2. Copy architecture of vanilla transformer
-3. Setup visualization for loss and albation studies with W&B
-4. Get good token generation - final goal
-
-
-#### 2: Reasoning and RL
-
-Todo
+https://github.com/9thbeerr
