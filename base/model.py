@@ -28,7 +28,7 @@ class MultiHeadAttention(nn.Module):
         
         self.d_head = config.d_model // config.n_head
         
-        assert self.d_model % self.n_head == 0, "d_model must be divisible by n_head"
+        assert self.d_model % self.n_head == 0, "dimensions of embeddings must be divisible by n_head"
         
         self.q_proj = nn.Linear(config.d_model, config.d_model)
         self.k_proj = nn.Linear(config.d_model, config.d_model)

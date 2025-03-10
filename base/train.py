@@ -9,6 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
 from dataclasses import dataclass
+from dataloader import create_dataloaders
 
 @dataclass
 class TrainConfig:
@@ -18,33 +19,32 @@ class TrainConfig:
     weight_decay: float = 0.01
     max_length: int = 128
 
-# Simple text dataset
-class SimpleTextDataset(Dataset):
-    def __init__(self):
-        self.texts = [
-            "hello world",
-            "this is a test",
-            "pytorch dataset",
-            "transformers are powerful",
-            "simple text dataset"
-        ]
-        self.vocab = {word: idx for idx, word in enumerate(set(" ".join(self.texts).split()))}
-        self.vocab["<pad>"] = len(self.vocab)
-        self.max_length = TrainConfig.max_length
+# # Simple text dataset
+# class SimpleTextDataset(Dataset):
+#     def __init__(self):
+#         self.texts = [
+#             "hello world",
+#             "this is a test",
+#             "pytorch dataset",
+#             "transformers are powerful",
+#             "simple text dataset"
+#         ]
+#         self.vocab = {word: idx for idx, word in enumerate(set(" ".join(self.texts).split()))}
+#         self.vocab["<pad>"] = len(self.vocab)
+#         self.max_length = TrainConfig.max_length
     
-    def __len__(self):
-        return len(self.texts)
+#     def __len__(self):
+#         return len(self.texts)
     
-    def __getitem__(self, idx):
-        tokens = self.texts[idx].split()
-        token_ids = [self.vocab[token] for token in tokens]
-        token_ids = token_ids[:self.max_length]
-        padding = [self.vocab["<pad>"]] * (self.max_length - len(token_ids))
-        return torch.tensor(token_ids + padding, dtype=torch.long)
+#     def __getitem__(self, idx):
+#         tokens = self.texts[idx].split()
+#         token_ids = [self.vocab[token] for token in tokens]
+#         token_ids = token_ids[:self.max_length]
+#         padding = [self.vocab["<pad>"]] * (self.max_length - len(token_ids))
+#         return torch.tensor(token_ids + padding, dtype=torch.long)
 
 train_config = TrainConfig()
-dataset = SimpleTextDataset()
-dataloader = DataLoader(dataset, batch_size=train_config.batch_size, shuffle=True)
+
 
 # Model, loss, optimizer
 transformerConfig = TransformerConfig(
